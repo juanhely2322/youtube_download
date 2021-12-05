@@ -1,0 +1,37 @@
+#lbl_link{
+    
+    color: steelblue;
+    font-size: 24px;
+    font-family: 'Times New Roman';
+    
+}
+#caja{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+}
+#txt_enlace{
+    margin:3px;
+}
+#buton_1{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+
+
+}
+#buton{
+    color: black;
+    
+}
+#title_1{
+    color: crimson;
+    font-size: 70px;
+    font-family: 'Franklin Gothic Medium';
+
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
