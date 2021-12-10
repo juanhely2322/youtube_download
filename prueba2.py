@@ -1,14 +1,18 @@
 import youtube_dl
 
-#links = "https://www.youtube.com/watch?v=UwzzkBTswJg"
-links='https://drive.google.com/file/d/1SdS3sm4AriVHfnEcc4gAG_VJ8FHjNoxC/view'
+links = "https://www.youtube.com/watch?v=UwzzkBTswJg"
 options = {
-'format': '136',
+'format': 'bestaudio/best',
 #'ignore-errors': True,
-
-'outtmpl': '{0}%(title)s-%(id)s.%(ext)s',
+'postprocessors': [{
+    'key': 'FFmpegExtractAudio',
+    'preferredcodec': 'mp3',
+    'preferredquality': '192',
+}],
+'outtmpl': './output/%(title)s.%(format_note)s.%(ext)s',
 }
 with youtube_dl.YoutubeDL(options) as youtube_object:
-    meta = youtube_object.extract_info(links, download = True)
-       
-print(meta["abr"])  
+    meta = youtube_object.extract_info(links, download = False)
+
+print(youtube_object['outtmpl'])
+print(meta["ext"])

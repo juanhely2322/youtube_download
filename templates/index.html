@@ -8,41 +8,137 @@
     <link rel="stylesheet" href="{{url_for('static',filename='estilos.css')}}">
 </head>
 <body>
-    <form action='/star_download' method="POST">
+    <form action='/star_download' method="GET">
         <h1 id="title_1">Youtube Download</h1>
-        <div id="caja">
-            <label id="lbl_link">Enlace</label>
-            <input type="text" id="txt_enlace"  name="enlace">
-            
-        </div>
-        <div id="video">
-            <div>
-                <button id="buton" >480p</button>
+        {%if videoId==" "%}
+            <div id="caja">
+                <label id="lbl_link">Enlace</label>
+                <input type="text" placeholder="YOUTUBE DOWNLOAD LINK" id="txt_enlace"  name="url">
+                <button>Verificar</button>
+                
             </div>
-            <div>
-                <button id="buton" >720p</button>
+        {%else:%}
+            <div id= "caja">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/{{videoId}}"  frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                 allowfullscreen></iframe>
             </div>
-           <div>
-            <button id="buton" >1080p</button>
-           </div>
-            
-        </div>
-        <div id="music">
-            <div>
-                <button id="buton" >128k</button>
+
+
+            <div id="video">
+                <label id="lbl_link">VIDEO</label>
+                <div>
+                    <button type="button" id="buton" value="480" name="480"onclick="descargarVideo_480()" >480p</button>
+                </div>
+                <div>
+                    <button type="button" id="buton"name="720" value="720" onclick="descargarVideo_720()" >720p</button>
+                </div>
+               <div>
+                <button type="button" id="buton" value="1080" name="1080"  onclick="descargarVideo_1080()">1080p</button>
+               </div>
+                
             </div>
-            <div>
-                <button id="buton" >192k</button>
+            <div id="music">
+                <label id="lbl_link">MUSICA</label>
+                <div>
+                    <button type="button"id="buton" name="128"  onclick="descargarVideo()" >128k</button>
+                </div>
+                <div>
+                    <button type="button" id="buton" name="192" value="192" onclick="descargarVideo_190()" >192k</button>
+                </div>
+               <div>
+                <button type="button" id="buton" name="320" value="320" onclick="descargarVideo_320()">320k</button>
+               </div>
+               
             </div>
-           <div>
-            <button id="buton" >320k</button>
-           </div>
-           
-        </div>
-        
+
+        {%endif%}
     
     </form>
 
-   
+        <script >
+            function descargarVideo() {
+               
+    
+                fetch('http://localhost:5000/descargar-video?url={{ url }}')
+                    .then(res => res.json())
+                    .then(response => {
+                        cargando.style.display = 'none';
+                        const link = document.createElement("a");
+                        link.download = 'video';
+                        link.href = response.url;
+                        link.click();
+                    })
+            }
+            function descargarVideo_190() {
+               
+    
+                fetch('http://localhost:5000/descargar-video_190?url={{ url }}')
+                    .then(res => res.json())
+                    .then(response => {
+                        
+                        const link = document.createElement("a");
+                        link.download = 'video';
+                        link.href = response.url;
+                        link.click();
+                    })
+            }
+
+            function descargarVideo_320() {
+               
+    
+                fetch('http://localhost:5000/descargar-video_320?url={{ url }}')
+                    .then(res => res.json())
+                    .then(response => {
+                        
+                        const link = document.createElement("a");
+                        link.download = 'video';
+                        link.href = response.url;
+                        link.click();
+                    })
+            }
+
+            function descargarVideo_480() {
+               
+    
+                fetch('http://localhost:5000/descargar-video_480?url={{ url }}')
+                    .then(res => res.json())
+                    .then(response => {
+                      
+                        const link = document.createElement("a");
+                        link.download = 'video';
+                        link.href = response.url;
+                        link.click();
+                    })
+            }
+
+            function descargarVideo_720() {
+               
+    
+                fetch('http://localhost:5000/descargar-video_720?url={{ url }}')
+                    .then(res => res.json())
+                    .then(response => {
+                      
+                        const link = document.createElement("a");
+                        link.download = 'video';
+                        link.href = response.url;
+                        link.click();
+                    })
+            }
+
+            function descargarVideo_1080() {
+               
+    
+                fetch('http://localhost:5000/descargar-video_1080?url={{ url }}')
+                    .then(res => res.json())
+                    .then(response => {
+                        const link = document.createElement("a");
+                        link.download = 'video';
+                        link.href = response.url;
+                        link.click();
+                    })
+            }
+                              
+        </script>
 </body>
 </html>
